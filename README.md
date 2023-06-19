@@ -3,11 +3,11 @@
 `random-dag-generator-go` is a library for (you guessed it!) generating random 
 Directed Acyclic Graphs (DAGs) in Go.
 
-<img src="./public/img/dag-a.png" height="200" alt="DAG A" />
-<img src="./public/img/dag-b.png" height="200" alt="DAG B" />
-<img src="./public/img/dag-c.png" height="200" alt="DAG C" />
-<img src="./public/img/dag-d.png" height="200" alt="DAG D" />
-<img src="./public/img/dag-e.png" height="200" alt="DAG E" />
+<img src="./public/img/dag-a.png" height="200" alt="DAG A">
+<img src="./public/img/dag-b.png" height="200" alt="DAG B">
+<img src="./public/img/dag-c.png" height="200" alt="DAG C">
+<img src="./public/img/dag-d.png" height="200" alt="DAG D">
+<img src="./public/img/dag-e.png" height="200" alt="DAG E">
 
 ## Features
 
