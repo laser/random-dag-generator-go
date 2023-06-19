@@ -21,57 +21,26 @@ func Random(options ...Options) (out Graph) {
 	}
 
 	out.Nodes = make([]Node, cfg.nodeQty)
-
 	for i := 0; i < cfg.nodeQty; i++ {
 		out.Nodes[i] = Node{Id: NodeId(fmt.Sprintf("%d", i))}
 	}
 
 	// initialize track indegree/outdegree of each node
-	degrees := make(map[NodeId]*degree)
+	degrees := make(map[NodeId]*degree, cfg.nodeQty)
 	for _, node := range out.Nodes {
 		degrees[node.Id] = &degree{}
 	}
 
-	ranks := rng.Perm(cfg.nodeQty)
-
-	i := 0
-	for i < cfg.nodeQty-1 {
-		targetIndex := i + 1 + rng.Intn(cfg.nodeQty-i-1)
-
-		ranks[targetIndex], ranks[i+1] = ranks[i+1], ranks[targetIndex]
-
-		source := NodeId(fmt.Sprintf("%d", ranks[i]))
-		target := NodeId(fmt.Sprintf("%d", ranks[targetIndex]))
-
-		if degrees[source].outdegree < cfg.maxOutdegree {
-			out.Edges = append(out.Edges, Edge{
-				SourceNodeId: source,
-				TargetNodeId: target,
-			})
-
-			degrees[source].incOut()
-			degrees[target].incIn()
-		}
-
-		if rng.Intn(100) < 50 { // 50 is a placeholder percentage
-			i += rng.Intn(cfg.nodeQty-i) + 1
-		} else {
-			i++
-		}
-	}
-
 	edgeMap := make(map[GroupKey]bool)
-	for _, edge := range out.Edges {
-		edgeMap[toKey(edge.SourceNodeId, edge.TargetNodeId)] = true
-	}
 
 	for i := 0; i < cfg.nodeQty; i++ {
+		// choosing j > i ensures that we don't create cycles or self-loops
 		for j := i + 1; j < cfg.nodeQty; j++ {
 			m := cfg.edgeFactor
 			n := rng.Float64()
 			winner := m > n
-			source := NodeId(fmt.Sprintf("%d", ranks[i]))
-			target := NodeId(fmt.Sprintf("%d", ranks[j]))
+			source := out.Nodes[i].Id
+			target := out.Nodes[j].Id
 			exists := edgeMap[toKey(source, target)]
 
 			if !exists && winner && degrees[source].outdegree < cfg.maxOutdegree {
