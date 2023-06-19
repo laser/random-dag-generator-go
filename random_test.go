@@ -12,8 +12,6 @@ var rng = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 func TestPartition(t *testing.T) {
 	t.Run("when nodes are connected, it returns one partition (Scenario A)", func(t *testing.T) {
-		t.Parallel()
-
 		for i := 0; i < 1000; i++ {
 			edges := []dag.Edge{
 				{"4", "3"},
@@ -32,8 +30,6 @@ func TestPartition(t *testing.T) {
 	})
 
 	t.Run("when nodes are connected, it returns one partition (Scenario B)", func(t *testing.T) {
-		t.Parallel()
-
 		for i := 0; i < 1000; i++ {
 			edges := []dag.Edge{
 				{"4", "3"},
@@ -52,8 +48,6 @@ func TestPartition(t *testing.T) {
 	})
 
 	t.Run("when two distinct graphs are present, it returns two partitions", func(t *testing.T) {
-		t.Parallel()
-
 		for i := 0; i < 1000; i++ {
 			edges := []dag.Edge{
 				{"4", "3"},
@@ -75,8 +69,6 @@ func TestPartition(t *testing.T) {
 
 func TestRandom(t *testing.T) {
 	t.Run("it never generates a graph containing cycles", func(t *testing.T) {
-		t.Parallel()
-
 		for i := 0; i < 1000; i++ {
 			nodeQty := 1 + rng.Intn(100)
 			maxOutdegree := 1 + rng.Intn(10)
@@ -91,8 +83,6 @@ func TestRandom(t *testing.T) {
 	})
 
 	t.Run("it never generates an isolated node", func(t *testing.T) {
-		t.Parallel()
-
 		for i := 0; i < 1000; i++ {
 			nodeQty := 1 + rng.Intn(100)
 			maxOutdegree := 1 + rng.Intn(10)
@@ -120,8 +110,6 @@ func TestRandom(t *testing.T) {
 	})
 
 	t.Run("it never generates more than one graph", func(t *testing.T) {
-		t.Parallel()
-
 		for i := 0; i < 1000; i++ {
 			nodeQty := 1 + rng.Intn(100)
 			maxOutdegree := 1 + rng.Intn(10)
@@ -136,8 +124,6 @@ func TestRandom(t *testing.T) {
 	})
 
 	t.Run("it never generates a node that violates the maximum outdegree", func(t *testing.T) {
-		t.Parallel()
-
 		for i := 0; i < 1000; i++ {
 			nodeQty := 1 + rng.Intn(100)
 			maxOutdegree := 1 + rng.Intn(10)
