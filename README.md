@@ -9,6 +9,7 @@ Directed Acyclic Graphs (DAGs) in Go.
 <img src="./public/img/dag-c.png" height="200" alt="DAG C">
 <img src="./public/img/dag-d.png" height="200" alt="DAG D">
 <img src="./public/img/dag-e.png" height="200" alt="DAG E">
+<img src="./public/img/dag-f.png" height="200" alt="DAG F">
 </p>
 
 ## Features
