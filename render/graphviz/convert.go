@@ -1,6 +1,8 @@
 package graphviz
 
 import (
+	"fmt"
+
 	"github.com/awalterschulze/gographviz"
 )
 
@@ -37,7 +39,7 @@ func From(dag RenderableGraph) gographviz.Graph {
 
 	// add nodes to graphviz graph
 	for _, node := range dag.GetNodes() {
-		err = gvgraph.AddNode("", node.GetID(), nil)
+		err = gvgraph.AddNode("", fmt.Sprintf(`"%s"`, node.GetID()), nil)
 		if err != nil {
 			panic(err)
 		}
@@ -45,7 +47,7 @@ func From(dag RenderableGraph) gographviz.Graph {
 
 	// add edges, too
 	for _, edge := range dag.GetEdges() {
-		err = gvgraph.AddEdge(edge.GetSourceNodeID(), edge.GetTargetNodeID(), true, nil)
+		err = gvgraph.AddEdge(fmt.Sprintf(`"%s"`, edge.GetSourceNodeID()), fmt.Sprintf(`"%s"`, edge.GetTargetNodeID()), true, nil)
 		if err != nil {
 			panic(err)
 		}
